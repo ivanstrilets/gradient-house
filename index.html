@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradient House - Конструктор CSS-градиентов</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Заголовок -->
+      <header class="header">
+        <h1>🎨 Gradient House</h1>
+        <p>Конструктор сложных CSS-градиентов</p>
+      </header>
+
+      <main class="main-content">
+        <!-- Левая панель - Управление слоями -->
+        <div class="panel left-panel">
+          <div class="panel-header">
+            <h2>Слои</h2>
+            <button class="btn btn-primary" id="addLayerBtn">+ Добавить</button>
+          </div>
+
+          <div class="layers-list" id="layersList">
+            <!-- Слои будут добавлены здесь -->
+          </div>
+        </div>
+
+        <!-- Центральная область - Preview -->
+        <div class="preview-container">
+          <!-- Примеры градиентов -->
+          <div class="preset-section">
+            <h3>Примеры</h3>
+            <select id="presetsSelect" class="input-field">
+              <option value="arctic-aurora">Арктическое сияние</option>
+              <option value="cosmic-nebula">Космическая туманность</option>
+              <option value="lava-flow">Поток лавы</option>
+              <option value="royal-purple">Королевский пурпур</option>
+              <option value="chip">Фишка</option>
+              <option value="nebula-core">Ядро туманности</option>
+              <option value="watercolour">Акварель</option>
+              <option value="target">Мишень</option>
+              <option value="dark-pattern">Темный паттерн</option>
+              <option value="paper-noise">Бумажный шум</option>
+              <option value="generative-texture">Генеративная текстура</option>
+              <option value="pseudo-liquid-metal">Псевдо-жидкий металл</option>
+              <option value="fractal-techno-pattern">
+                Фрактальный техно-паттерн
+              </option>
+              <option value="abstract-spots">Абстрактные пятна</option>
+              <option value="offset-ellipse-demo">
+                Эллипс со смещённым центром
+              </option>
+              <option value="deep-dark-gradient">
+                Глубокий тёмный градиент
+              </option>
+            </select>
+          </div>
+
+          <!-- Область предварительного просмотра -->
+          <div class="preview-section">
+            <h3>Превью</h3>
+            <div class="preview-controls-top">
+              <label>Форма</label>
+              <select id="previewShape" class="input-field">
+                <option value="rectangle">Прямоугольник</option>
+                <option value="square">Квадрат</option>
+                <option value="circle">Круг</option>
+              </select>
+            </div>
+            <div class="preview" id="preview"></div>
+          </div>
+
+          <!-- Редактор текущего слоя -->
+          <div class="editor-section" id="editorSection" style="display: none">
+            <h3>Редактирование слоя</h3>
+            <div class="form-group">
+              <label>Тип градиента</label>
+              <select id="gradientType" class="input-field">
+                <option value="linear-gradient">Linear Gradient</option>
+                <option value="radial-gradient">Radial Gradient</option>
+                <option value="conic-gradient">Conic Gradient</option>
+                <option value="repeating-linear-gradient">
+                  Repeating Linear
+                </option>
+                <option value="repeating-radial-gradient">
+                  Repeating Radial
+                </option>
+                <option value="repeating-conic-gradient">
+                  Repeating Conic
+                </option>
+              </select>
+            </div>
+
+            <div id="angleControl" class="form-group">
+              <label>Угол (градусы): <span id="angleValue">90</span>°</label>
+              <input
+                type="range"
+                id="angle"
+                min="0"
+                max="360"
+                value="90"
+                class="slider"
+              />
+            </div>
+
+            <div
+              id="radialShapeControl"
+              class="form-group"
+              style="display: none"
+            >
+              <label>Форма радиального градиента</label>
+              <select id="radialShape" class="input-field">
+                <option value="circle">Circle</option>
+                <option value="ellipse">Ellipse</option>
+              </select>
+            </div>
+
+            <div
+              id="radialSizeControl"
+              class="form-group"
+              style="display: none"
+            >
+              <label>Размер радиального градиента</label>
+              <select id="radialSize" class="input-field">
+                <option value="closest-side">Closest Side</option>
+                <option value="closest-corner">Closest Corner</option>
+                <option value="farthest-side">Farthest Side</option>
+                <option value="farthest-corner">Farthest Corner</option>
+              </select>
+            </div>
+
+            <div id="positionControl" class="form-group" style="display: none">
+              <label>Позиция X: <span id="positionXValue">50</span>%</label>
+              <input
+                type="range"
+                id="positionX"
+                min="-100"
+                max="100"
+                value="0"
+                class="slider"
+              />
+              <label>Позиция Y: <span id="positionYValue">50</span>%</label>
+              <input
+                type="range"
+                id="positionY"
+                min="-100"
+                max="100"
+                value="0"
+                class="slider"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Режим наложения</label>
+              <select id="blendMode" class="input-field">
+                <option value="normal">Normal</option>
+                <option value="multiply">Multiply</option>
+                <option value="overlay">Overlay</option>
+                <option value="screen">Screen</option>
+                <option value="color-dodge">Color Dodge</option>
+                <option value="color-burn">Color Burn</option>
+                <option value="darken">Darken</option>
+                <option value="lighten">Lighten</option>
+                <option value="color">Color</option>
+                <option value="hue">Hue</option>
+                <option value="saturation">Saturation</option>
+                <option value="luminosity">Luminosity</option>
+              </select>
+            </div>
+
+            <!-- Цветовые стопы -->
+            <div class="form-group">
+              <div class="color-stops-header">
+                <label>Цветовые стопы</label>
+                <button class="btn btn-small" id="addColorStopBtn">
+                  + Добавить
+                </button>
+              </div>
+              <div class="color-stops-list" id="colorStopsList">
+                <!-- Цветовые стопы здесь -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правая панель - Вывод CSS -->
+        <div class="panel right-panel">
+          <div class="panel-header">
+            <h2>CSS Код</h2>
+            <button class="btn btn-primary" id="copyCssBtn">
+              📋 Скопировать
+            </button>
+          </div>
+
+          <div class="css-output">
+            <textarea
+              id="cssOutput"
+              class="css-textarea"
+              readonly
+              spellcheck="false"
+            ></textarea>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
